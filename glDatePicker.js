@@ -181,7 +181,10 @@
 		onHide: function(calendar) { calendar.hide(); },
 
 		// First date of the month.
-		firstDate: null
+		firstDate: null,
+
+		//show initial date in target input element
+		showDateInputIntially: true
 	};
 
 	// Our plugin object
@@ -234,6 +237,11 @@
 
 			// Render calendar
 			self.render();
+
+			//show intial date
+			if(options.showDateInputIntially) {
+				options.onClick(el, $(this), options.selectedDate);
+			}
 		};
 
 		// Public methods
@@ -640,6 +648,7 @@
 										// Save date to selected and first
 										options.selectedDate = options.firstDate = clickedData.date;
 
+
 										// Update calendar (and auto-hide if necessary)
 										self.render(function() {
 											if(!options.showAlways && options.hideOnClick) {
@@ -780,7 +789,7 @@
 		Date.prototype._time = function() {
 			return this._clear().getTime();
 		};
-
+		
 		Date.prototype._max = function() {
 			var isLeapYear = (new Date(this.getYear(), 1, 29).getMonth() == 1) ? 1 : 0;
 			var days = [31, 28 + isLeapYear, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
