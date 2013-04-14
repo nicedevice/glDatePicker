@@ -184,7 +184,7 @@
 		firstDate: null,
 
 		//show initial date in target input element
-		showDateInputIntially: true
+		showDateInputInitial: true
 	};
 
 	// Our plugin object
@@ -239,7 +239,7 @@
 			self.render();
 
 			//show intial date
-			if(options.showDateInputIntially) {
+			if(options.showDateInputInitial) {
 				options.onClick(el, $(this), options.selectedDate);
 			}
 		};
