@@ -168,6 +168,7 @@
 			el.val(date.toLocaleDateString());
 		}),
 
+
 		// Callback that will trigger when the user hovers over a selectable date.
 		// This callback receives the same set of parameters as onClick.
 		onHover: function(el, cell, date, data) {},
@@ -184,7 +185,11 @@
 		firstDate: null,
 
 		//show initial date in target input element
-		showDateInputInitial: true
+		showDateInputIntially: true,
+		onStart: (function(el, cell, date) {
+			el.val(date.toLocaleDateString());
+		})
+
 	};
 
 	// Our plugin object
@@ -239,8 +244,8 @@
 			self.render();
 
 			//show intial date
-			if(options.showDateInputInitial) {
-				options.onClick(el, $(this), options.selectedDate);
+			if(options.showDateInputIntially) {
+				options.onStart(el, $(this), options.selectedDate);
 			}
 		};
 
@@ -789,7 +794,7 @@
 		Date.prototype._time = function() {
 			return this._clear().getTime();
 		};
-		
+
 		Date.prototype._max = function() {
 			var isLeapYear = (new Date(this.getYear(), 1, 29).getMonth() == 1) ? 1 : 0;
 			var days = [31, 28 + isLeapYear, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
